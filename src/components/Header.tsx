@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
 import PhoneLoginModal from "./PhoneLoginModal";
 
+
 export default function Header() {
   const [typedText, setTypedText] = useState("");
   const [wordIndex, setWordIndex] = useState(0);

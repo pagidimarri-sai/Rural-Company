@@ -1,6 +1,6 @@
 // src/components/SalonForMenSection.tsx
 
-import React from "react";
+
 
 const salonMenItems = [
   {

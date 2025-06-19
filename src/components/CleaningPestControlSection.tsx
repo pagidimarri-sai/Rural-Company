@@ -1,6 +1,6 @@
 // src/components/CleaningPestControlSection.tsx
 
-import React from "react";
+
 
 const services = [
   {

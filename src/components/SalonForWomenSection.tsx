@@ -1,6 +1,6 @@
 // src/components/SalonForWomenSection.tsx
 
-import React from "react";
+
 
 const salonItems = [
   {

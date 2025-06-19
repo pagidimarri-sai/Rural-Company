@@ -1,5 +1,6 @@
 // src/components/PhoneLoginModal.tsx
-import React, { useState } from "react";
+import { useState } from "react";
+
 import { createPortal } from "react-dom";
 import { HiShieldCheck } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";

@@ -1,5 +1,6 @@
 // src/components/SplashScreen.tsx
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import logo from '../assets/urban-logo.png'; // Ensure this exists
 
 const typingWords = [

@@ -228,6 +228,7 @@ export default function HeroSection() {
     </section>
   );
 }
+import type { JSX } from 'react';
 
 function ServiceCard({
   icon,

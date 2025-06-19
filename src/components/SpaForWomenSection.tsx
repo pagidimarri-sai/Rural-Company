@@ -1,6 +1,5 @@
 // src/components/SpaForWomenSection.tsx
 
-import React from "react";
 
 const spaItems = [
   {
