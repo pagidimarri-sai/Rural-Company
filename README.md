@@ -1,54 +1,62 @@
-# React + TypeScript + Vite
+# 🌾 Rural Company – Urban Services to Your Village Doorstep
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Rural Company is a modern, full-featured React-based – designed to deliver home services such as salon, appliance repair, cleaning, pest control, and native services to rural and urban users alike. Built with **React**, **Vite**, and **Tailwind CSS**, the platform showcases premium UI/UX and seamless experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🔍 **Animated search bar** with rotating keywords
+- 💇‍♀️ **Salon Services** for men & women (grid based)
+- 🧼 **Cleaning & Pest Control** section
+- 🛠️ **Home & Appliance Repair**
+- 📱 **Mobile-style OTP login popup modal**
+- 📊 **Rating & Stats cards** in the hero section
+- 🎨 Fully responsive & elegant glassmorphism designs
+- 📦 Smooth animations, transitions & hover effects
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🔧 Tech Stack
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| Frontend     | Other Features             |
+|--------------|----------------------------|
+| React.js     | Glassmorphism Effects      |
+| Vite         | Typing Animation           |
+| Tailwind CSS | Custom Scrollable Carousels |
+| TypeScript   | Modal-based Phone Login UI |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 📷 Screenshots
+
+
+## 🌐 Live Demo
+
+
+## 📁 Folder Structure
+
+```bash
+src/
+├── assets/
+├── components/
+├── pages/
+└── App.tsx
+📦 Getting Started Locally
+bash
+Copy
+Edit
+git clone https://github.com/yourusername/rural-company.git
+cd rural-company
+npm install
+npm run dev
+🤝 Contributing
+Pull requests are welcome! Feel free to fork and suggest improvements.
+
+📄 License
+This project is licensed under MIT.
+
+👋 Made with ❤️ by Pagidimarri Sai
+yaml
+Copy
+Edit
