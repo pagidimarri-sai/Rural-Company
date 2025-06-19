@@ -1,0 +1,59 @@
+// src/components/ApplianceRepair.tsx
+
+const appliances = [
+  {
+    imageUrl: "/src/assets/acf.jpg",
+    title: "AC Repair & Service",
+    link: "/appliance/ac-repair",
+  },
+  {
+    imageUrl: "/src/assets/native.jpeg",
+    title: "Smart Locks / Native Devices",
+    link: "/appliance/smart-devices",
+  },
+  {
+    imageUrl: "/src/assets/refrigerator.webp",
+    title: "Refrigerator Repair",
+    link: "/appliance/refrigerator-repair",
+  },
+  {
+    imageUrl: "/src/assets/television.webp",
+    title: "Television Service",
+    link: "/appliance/television-service",
+  },
+  {
+    imageUrl: "/src/assets/washng machine.jpg",
+    title: "Washing Machine Repair",
+    link: "/appliance/washing-machine",
+  },
+];
+
+export default function ApplianceRepair() {
+  return (
+    <section className="bg-gray-100 pt-6 pb-12 px-6">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Appliance Repair & Service</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {appliances.map((item, index) => (
+            <a
+              key={index}
+              href={item.link}
+              className="group transition-transform transform hover:scale-105 text-center"
+            >
+              <div className="rounded-xl overflow-hidden shadow-md">
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  className="w-full h-[230px] object-cover"
+                />
+              </div>
+              <p className="mt-2 text-sm font-medium text-gray-800">
+                {item.title}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
