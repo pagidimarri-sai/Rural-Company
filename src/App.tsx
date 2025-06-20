@@ -34,14 +34,22 @@
 // export default App;
 
 // src/App.tsx
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import FeatureSection from "./components/FeatureSection";
 import CartPage from "./pages/CartPage";
 import BeautyPage from "./pages/BeautyPage";
+import SplashScreen from "./components/SplashScreen";
 
 export default function App() {
+  const [splashDone, setSplashDone] = useState(false);
+
+  if (!splashDone) {
+    return <SplashScreen onFinish={() => setSplashDone(true)} />;
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
@@ -56,7 +64,7 @@ export default function App() {
           }
         />
         <Route path="/cart" element={<CartPage />} />
-         <Route path="/beauty" element={<BeautyPage />} />
+        <Route path="/beauty" element={<BeautyPage />} />
       </Routes>
     </div>
   );
