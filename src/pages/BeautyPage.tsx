@@ -14,9 +14,7 @@ import BeautyFeatureSection from "../components/BeautyFeatureSection";
 import SalonForWomenSection from "../components/SalonForWomenSection";
 import SpaForWomenSection from "../components/SpaForWomenSection";
 import MassageForMen from "../components/MassageForMen";
-import MostBookedServices from "../components/MostBookedServices";
 import SalonForMenSection from "../components/SalonForMenSection";
-import NewNoteworthySection from "../components/NewNoteworthySection";
 import Footer from "../components/Footer";
 
 export default function BeautyPage() {
