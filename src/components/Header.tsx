@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
-import PhoneLoginModal from "./PhoneLoginModal";
+import OTPLoginModal from "./OTPLoginModal";
 
-// ✅ Use logo from public folder
 const logo = "/assets/urban-logo.png";
 
 export default function Header() {
@@ -10,10 +10,22 @@ export default function Header() {
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentPath = location.pathname;
 
   const keywords = ["facial", "kitchen cleaning", "AC repair"];
 
-  // Typing animation for search box
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   useEffect(() => {
     const currentWord = keywords[wordIndex];
     const timeout = setTimeout(() => {
@@ -28,36 +40,62 @@ export default function Header() {
         }, 2000);
       }
     }, 100);
-
     return () => clearTimeout(timeout);
   }, [charIndex, wordIndex]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUser(null);
+    setShowDropdown(false);
+  };
+
+  const navItems = [
+    { name: "Beauty", path: "/beauty" },
+    { name: "Home", path: "/home" },
+    { name: "Native", path: "/native" },
+  ];
 
   return (
     <>
       <header className="bg-white shadow py-3 sticky top-0 z-50">
-        <div className="max-w-[1280px] w-full px-6 mx-auto flex justify-between items-center">
-          {/* Left: Logo & Nav */}
-          <div className="flex items-center gap-4">
+        <div className="max-w-[1280px] mx-auto px-6 flex justify-between items-center gap-4">
+          {/* Left: Logo + Nav */}
+          <div className="flex items-center gap-4 min-w-max mr-4">
             <img
               src={logo}
               alt="Rural Company"
               className="w-16 h-auto cursor-pointer"
+              onClick={() => navigate("/")}
             />
-            <nav className="flex gap-6 ml-4">
-              <button className="text-sm hover:text-purple-600 font-medium">Beauty</button>
-              <button className="text-sm hover:text-purple-600 font-medium">Home</button>
-              <button className="text-sm hover:text-purple-600 font-medium">Native</button>
+            <nav className="flex gap-4 ml-2">
+              {navItems.map(({ name, path }) => {
+                const isActive = currentPath.startsWith(path);
+                return (
+                  <Link
+                    key={path}
+                    to={path}
+                    className={`relative text-sm px-2 py-1 font-medium transition-all duration-200 ${
+                      isActive
+                        ? "text-purple-600 font-semibold after:scale-x-100"
+                        : "text-gray-700 hover:text-purple-600"
+                    } after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-purple-600 after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100`}
+                  >
+                    {name}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
 
-          {/* Middle: Location + Search */}
-          <div className="flex items-center gap-3 flex-grow mx-4">
+          {/* Middle: Location & Search */}
+          <div className="flex items-center gap-3 flex-grow max-w-[500px]">
             <input
               type="text"
               placeholder="📍 Hyderabad, Telangana"
-              className="border rounded px-2 py-1 text-sm max-w-[160px] focus:ring-2 focus:ring-purple-300"
+              className="border rounded px-2 py-1 text-sm w-[160px] focus:ring-2 focus:ring-purple-300"
             />
-            <div className="relative flex-1">
+            <div className="relative flex-grow">
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
@@ -67,27 +105,66 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Right: Cart & Login */}
-          <div className="flex items-center gap-4 text-gray-700">
+          {/* Right: Cart + Login (Shifted slightly left) */}
+          <div className="flex items-center gap-4 min-w-max -translate-x-4">
             <FaShoppingCart
               className="text-lg cursor-pointer hover:text-purple-600"
               title="Cart"
+              onClick={() => navigate("/cart")}
             />
-            <FaUser
-              onClick={() => setIsModalOpen(true)}
-              className="text-lg cursor-pointer hover:text-purple-600"
-              title="Login"
-            />
+            <div className="relative">
+              <FaUser
+                onClick={() => setShowDropdown(!showDropdown)}
+                className="text-lg cursor-pointer hover:text-purple-600"
+                title="Login"
+              />
+              {showDropdown && (
+                <div
+                  className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-[999]"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {!user ? (
+                    <button
+                      onClick={() => {
+                        setIsModalOpen(true);
+                        setShowDropdown(false);
+                      }}
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
+                    >
+                      Login
+                    </button>
+                  ) : (
+                    <>
+                      <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">
+                        My Bookings
+                      </button>
+                      <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">
+                        Help Center
+                      </button>
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-red-500"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Phone Login Modal */}
-      <PhoneLoginModal
+      {/* OTP Modal */}
+      <OTPLoginModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onLoginSuccess={(userData) => {
+          setUser(userData);
+          setIsModalOpen(false);
+        }}
       />
     </>
   );
 }
-

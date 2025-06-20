@@ -36,16 +36,16 @@ export default function SalonForWomenSection() {
             <a
               href={item.link}
               key={index}
-              className="relative rounded-xl overflow-hidden shadow-md hover:shadow-lg hover:scale-105 transition-transform duration-300 block"
+              className="rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 block"
             >
-              <div className="absolute top-3 left-3 px-3 py-1 rounded-md backdrop-blur-md bg-white/30 text-gray-900 text-sm font-semibold shadow-sm z-10">
-                {item.label}
-              </div>
               <img
                 src={item.imageUrl}
                 alt={item.label}
-                className="w-full h-[230px] object-cover"
+                className="w-full h-[230px] object-cover rounded-lg"
               />
+              <p className="mt-2 text-sm font-medium text-gray-800 text-center">
+                {item.label}
+              </p>
             </a>
           ))}
         </div>

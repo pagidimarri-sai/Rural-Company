@@ -1,23 +1,17 @@
 import { useRef, useState, useEffect } from "react";
-import SalonForWomenSection from "./SalonForWomenSection";
-import AdBanner from "./AdBanner";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import FeatureCard from "./FeatureCard";
+import NewNoteworthySection from "./NewNoteworthySection";
+import MostBookedServices from "./MostBookedServices";
+import AdBanner from "./AdBanner";
+import SalonForWomenSection from "./SalonForWomenSection";
 import SpaForWomenSection from "./SpaForWomenSection";
 import CleaningPestControlSection from "./CleaningPestControlSection";
-import NewNoteworthySection from "./NewNoteworthySection";
 import ApplianceRepair from "./ApplianceRepair";
-import MassageForMen from './MassageForMen';
-import MostBookedServices from "./MostBookedServices";
-import HomeRepair from './HomeRepair';
-import SalonForMenSection from './SalonForMenSection';
+import HomeRepair from "./HomeRepair";
+import MassageForMen from "./MassageForMen";
+import SalonForMenSection from "./SalonForMenSection";
 import Footer from "./Footer";
-
-
-
-const BOX_WIDTH = 405;
-const GAP = 32;
-const VISIBLE_CARDS = 3;
 
 const features = [
   { imageUrl: "/assets/ac.webp", link: "/services/ac-cleaning" },
@@ -31,76 +25,87 @@ const features = [
   { imageUrl: "/assets/camera.webp", link: "/products/smart-doorbell" },
 ];
 
-
 export default function FeatureSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollX, setScrollX] = useState(0);
-  const maxScroll = (features.length - VISIBLE_CARDS) * (BOX_WIDTH + GAP);
 
-  const scrollLeft = () => {
-    const newScroll = Math.max(scrollX - (BOX_WIDTH + GAP) * VISIBLE_CARDS, 0);
-    scrollRef.current?.scrollTo({ left: newScroll, behavior: "smooth" });
-    setScrollX(newScroll);
-  };
+  const CARD_WIDTH = 384;
+  const GAP = 24;
+  const SCROLL_AMOUNT = CARD_WIDTH * 3 + GAP * 2;
 
-  const scrollRight = () => {
-    const newScroll = Math.min(scrollX + (BOX_WIDTH + GAP) * VISIBLE_CARDS, maxScroll);
-    scrollRef.current?.scrollTo({ left: newScroll, behavior: "smooth" });
+  const scroll = (dir: "left" | "right") => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const newScroll =
+      dir === "left"
+        ? Math.max(container.scrollLeft - SCROLL_AMOUNT, 0)
+        : Math.min(container.scrollLeft + SCROLL_AMOUNT, container.scrollWidth);
+    container.scrollTo({ left: newScroll, behavior: "smooth" });
     setScrollX(newScroll);
   };
 
   useEffect(() => {
     const el = scrollRef.current;
-    const handle = () => {
+    const onScroll = () => {
       if (el) setScrollX(el.scrollLeft);
     };
-    el?.addEventListener("scroll", handle);
-    return () => el?.removeEventListener("scroll", handle);
+    el?.addEventListener("scroll", onScroll);
+    return () => el?.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <>
-      {/* Top Feature Cards Carousel */}
-      <section className="bg-gray-100 py-10 px-6">
-        <div className="relative max-w-7xl mx-auto">
+      {/* Feature Cards Carousel */}
+      <section className="bg-gray-100 py-10">
+        <div className="relative max-w-[1280px] mx-auto px-6">
+          {/* Left Arrow */}
           {scrollX > 0 && (
             <button
-              onClick={scrollLeft}
-              className="absolute -left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow"
+              onClick={() => scroll("left")}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md"
             >
               <FaChevronLeft />
             </button>
           )}
 
-          {scrollX < maxScroll && (
-            <button
-              onClick={scrollRight}
-              className="absolute -right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow"
-            >
-              <FaChevronRight />
-            </button>
-          )}
+          {/* Right Arrow */}
+          {scrollRef.current &&
+            scrollX + scrollRef.current.clientWidth < scrollRef.current.scrollWidth && (
+              <button
+                onClick={() => scroll("right")}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md"
+              >
+                <FaChevronRight />
+              </button>
+            )}
 
+          {/* Feature Cards */}
           <div
             ref={scrollRef}
-            className="flex gap-8 overflow-x-auto scroll-smooth no-scrollbar"
-            style={{ width: `${VISIBLE_CARDS * BOX_WIDTH + (VISIBLE_CARDS - 1) * GAP}px` }}
+            className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar"
+            style={{
+              width: `${CARD_WIDTH * 3 + GAP * 2}px`,
+            }}
           >
             {features.map((item, index) => (
-              <FeatureCard key={index} {...item} />
+              <div
+                key={index}
+                className="flex-shrink-0 w-[384px] h-[200px] rounded-xl overflow-hidden shadow bg-white"
+              >
+                <FeatureCard {...item} />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* New & Noteworthy Section */}
+      {/* Remaining Sections */}
       <div className="mt-20">
         <div className="max-w-7xl mx-auto px-6">
           <NewNoteworthySection />
         </div>
       </div>
 
-      {/* Most Booked Services Section */}
       <div className="mt-20">
         <div className="max-w-7xl mx-auto px-6">
           <MostBookedServices />

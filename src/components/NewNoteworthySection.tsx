@@ -79,8 +79,8 @@ export default function NewNoteworthySection() {
   }, []);
 
   return (
-    <section className="bg-gray-100 pt-8 pb-12 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-gray-100 pt-8 pb-12">
+      <div className="max-w-[1280px] mx-auto px-6">
         <h2 className="text-xl font-bold text-gray-800 mb-6">
           New and Noteworthy
         </h2>
@@ -89,33 +89,31 @@ export default function NewNoteworthySection() {
           {scrollX > 0 && (
             <button
               onClick={scrollLeft}
-              className="absolute -left-5 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow"
+              className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-200 p-2 rounded-full shadow-sm"
             >
               <FaChevronLeft />
             </button>
           )}
 
-          {scrollX < maxScroll && (
-            <button
-              onClick={scrollRight}
-              className="absolute -right-5 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow"
-            >
-              <FaChevronRight />
-            </button>
-          )}
+          {scrollRef.current &&
+            scrollX + scrollRef.current.clientWidth < scrollRef.current.scrollWidth && (
+              <button
+                onClick={scrollRight}
+                className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-200 p-2 rounded-full shadow-sm"
+              >
+                <FaChevronRight />
+              </button>
+            )}
 
           <div
             ref={scrollRef}
-            className="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar"
-            style={{
-              width: `${VISIBLE_CARDS * BOX_WIDTH + (VISIBLE_CARDS - 1) * GAP}px`,
-            }}
+            className="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar w-full"
           >
             {noteworthyItems.map((item, index) => (
               <div key={index} className="flex flex-col items-center">
                 <a
                   href={item.link}
-                  className="w-[230px] h-[230px] flex-shrink-0 rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform duration-300"
+                  className="w-[230px] h-[230px] flex-shrink-0 rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300"
                 >
                   <img
                     src={item.imageUrl}

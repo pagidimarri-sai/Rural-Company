@@ -1,34 +1,63 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
-import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import FeatureSection from './components/FeatureSection';
-import SplashScreen from './components/SplashScreen'; // ✅ import new component
+// import Header from './components/Header';
+// import HeroSection from './components/HeroSection';
+// import FeatureSection from './components/FeatureSection';
+// import SplashScreen from './components/SplashScreen'; // ✅ import new component
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
+// function App() {
+//   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3500); // 3.5 seconds splash screen
+//   useEffect(() => {
+//     const timer = setTimeout(() => {
+//       setIsLoading(false);
+//     }, 3500); // 3.5 seconds splash screen
 
-    return () => clearTimeout(timer);
-  }, []);
+//     return () => clearTimeout(timer);
+//   }, []);
 
+//   return (
+//     <div className="min-h-screen bg-gray-100">
+//       {isLoading ? (
+//         <SplashScreen onFinish={() => setIsLoading(false)} />
+//       ) : (
+//         <>
+//           <Header />
+//           <HeroSection />
+//           <FeatureSection />
+//         </>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default App;
+
+// src/App.tsx
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import HeroSection from "./components/HeroSection";
+import FeatureSection from "./components/FeatureSection";
+import CartPage from "./pages/CartPage";
+import BeautyPage from "./pages/BeautyPage";
+
+export default function App() {
   return (
     <div className="min-h-screen bg-gray-100">
-      {isLoading ? (
-        <SplashScreen onFinish={() => setIsLoading(false)} />
-      ) : (
-        <>
-          <Header />
-          <HeroSection />
-          <FeatureSection />
-        </>
-      )}
+      <Header />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <HeroSection />
+              <FeatureSection />
+            </>
+          }
+        />
+        <Route path="/cart" element={<CartPage />} />
+         <Route path="/beauty" element={<BeautyPage />} />
+      </Routes>
     </div>
   );
 }
-
-export default App;

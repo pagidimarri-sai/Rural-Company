@@ -27,18 +27,16 @@ export default function MassageForMenSection() {
             <a
               href={item.link}
               key={index}
-              className="relative w-[250px] h-[250px] rounded-xl overflow-hidden shadow-md hover:shadow-lg hover:scale-105 transition-transform duration-300 block"
+              className="w-[250px] flex flex-col items-center hover:scale-105 transition-transform duration-300"
             >
-              {/* Glass-style label */}
-              <div className="absolute top-3 left-3 px-3 py-1 rounded-md backdrop-blur-md bg-white/30 text-gray-900 text-sm font-semibold shadow-sm z-10">
-                {item.label}
-              </div>
-
               <img
                 src={item.imageUrl}
                 alt={item.label}
-                className="w-full h-full object-cover"
+                className="w-full h-[250px] object-cover rounded-xl shadow-md"
               />
+              <p className="mt-2 text-sm font-medium text-gray-800 text-center">
+                {item.label}
+              </p>
             </a>
           ))}
         </div>

@@ -7,70 +7,70 @@ const VISIBLE_CARDS = 5;
 
 const bookedServices = [
   {
-    imageUrl: "/assets/painting partners.webp",
+    imageUrl: "/assets/painting%20partners.webp",
     link: "/services/painting-partners",
     label: "Painting Partners",
     price: "₹1,499",
     rating: "4.8 (102k)",
   },
   {
-    imageUrl: "/assets/top load checkup.png",
+    imageUrl: "/assets/top%20load%20checkup.png",
     link: "/services/top-load-checkup",
     label: "Top Load Checkup",
     price: "₹299",
     rating: "4.9 (98k)",
   },
   {
-    imageUrl: "/assets/tap repair.webp",
+    imageUrl: "/assets/tap%20repair.webp",
     link: "/services/tap-repair",
     label: "Tap Repair",
     price: "₹199",
     rating: "4.7 (85k)",
   },
   {
-    imageUrl: "/assets/intense cleaning.webp",
+    imageUrl: "/assets/intense%20cleaning.webp",
     link: "/services/intense-cleaning",
     label: "Intense Cleaning",
     price: "₹999",
     rating: "4.9 (112k)",
   },
   {
-    imageUrl: "/assets/pest control.jpeg",
+    imageUrl: "/assets/pest%20control.jpeg",
     link: "/services/pest-control",
     label: "Pest Control",
     price: "₹799",
     rating: "4.8 (93k)",
   },
   {
-    imageUrl: "/assets/foam jet ac service.webp",
+    imageUrl: "/assets/foam%20jet%20ac%20service.webp",
     link: "/services/ac-foam-jet",
     label: "Foam Jet AC Service",
     price: "₹649",
     rating: "4.9 (147k)",
   },
   {
-    imageUrl: "/assets/apartment termite control.webp",
+    imageUrl: "/assets/apartment%20termite%20control.webp",
     link: "/services/termite-control",
     label: "Termite Control",
     price: "₹1,299",
     rating: "4.8 (73k)",
   },
   {
-    imageUrl: "/assets/apartment pest control.jpeg",
+    imageUrl: "/assets/apartment%20pest%20control.jpeg",
     link: "/services/apartment-pest-control",
     label: "Apartment Pest Control",
     price: "₹899",
     rating: "4.9 (134k)",
   },
   {
-    imageUrl: "/assets/intense cleaning.webp",
+    imageUrl: "/assets/intense%20cleaning.webp",
     link: "/services/intense-cleaning-2",
     label: "Full Home Deep Clean",
     price: "₹1,599",
     rating: "5.0 (88k)",
   },
   {
-    imageUrl: "/assets/pest control.jpeg",
+    imageUrl: "/assets/pest%20control.jpeg",
     link: "/services/pest-control-2",
     label: "Anti-Roach Spray",
     price: "₹399",
@@ -105,35 +105,33 @@ export default function MostBookedServices() {
   }, []);
 
   return (
-    <section className="bg-gray-100 pt-8 pb-12 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-gray-100 pt-8 pb-12">
+      <div className="max-w-[1280px] mx-auto px-6">
         <h2 className="text-xl font-bold text-gray-800 mb-6">Most Booked Services</h2>
 
         <div className="relative">
           {scrollX > 0 && (
             <button
               onClick={scrollLeft}
-              className="absolute -left-5 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow"
+              className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow"
             >
               <FaChevronLeft />
             </button>
           )}
 
-          {scrollX < maxScroll && (
-            <button
-              onClick={scrollRight}
-              className="absolute -right-5 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow"
-            >
-              <FaChevronRight />
-            </button>
-          )}
+          {scrollRef.current &&
+            scrollX + scrollRef.current.clientWidth < scrollRef.current.scrollWidth && (
+              <button
+                onClick={scrollRight}
+                className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow"
+              >
+                <FaChevronRight />
+              </button>
+            )}
 
           <div
             ref={scrollRef}
-            className="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar"
-            style={{
-              width: `${VISIBLE_CARDS * BOX_WIDTH + (VISIBLE_CARDS - 1) * GAP}px`,
-            }}
+            className="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar w-full"
           >
             {bookedServices.map((item, index) => (
               <div key={index} className="flex flex-col items-center">

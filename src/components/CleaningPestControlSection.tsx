@@ -28,7 +28,7 @@ const services = [
 
 export default function CleaningPestControlSection() {
   return (
-    <section className="bg-white py-10 px-6">
+    <section className="bg-transparent py-10 px-6">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-800 mb-8">
           Cleaning & Pest Control
@@ -37,16 +37,16 @@ export default function CleaningPestControlSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {services.map((item, index) => (
             <a
-              href={item.link}
               key={index}
-              className="flex flex-col items-center rounded-xl overflow-hidden shadow-md group hover:scale-[1.03] transition-transform duration-300"
+              href={item.link}
+              className="flex flex-col items-center hover:scale-105 transition-transform duration-300"
             >
               <img
                 src={item.imageUrl}
                 alt={item.label}
-                className="w-full h-48 object-cover rounded-t-xl"
+                className="w-full h-48 object-cover rounded-lg"
               />
-              <p className="mt-2 text-sm font-medium text-gray-800 text-center px-2">
+              <p className="mt-2 text-sm font-medium text-gray-800 text-center">
                 {item.label}
               </p>
             </a>
