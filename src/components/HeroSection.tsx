@@ -107,7 +107,7 @@ export default function HeroSection() {
         <div className="w-full md:w-1/2 flex justify-center items-center">
           <div className="grid grid-cols-2 grid-rows-2 gap-2 h-[600px] w-full max-w-md">
             <img
-              src="/assets/images.jpeg"
+              src="/assets/images.png"
               alt="Spa"
               className="w-full h-full object-cover rounded-xl shadow-md"
             />

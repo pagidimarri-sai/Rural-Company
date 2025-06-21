@@ -42,6 +42,7 @@ import FeatureSection from "./components/FeatureSection";
 import CartPage from "./pages/CartPage";
 import BeautyPage from "./pages/BeautyPage";
 import SplashScreen from "./components/SplashScreen";
+import HowItWorks from "./components/HowItWorks";
 
 export default function App() {
   const [splashDone, setSplashDone] = useState(false);
@@ -59,6 +60,7 @@ export default function App() {
           element={
             <>
               <HeroSection />
+              <HowItWorks />
               <FeatureSection />
             </>
           }

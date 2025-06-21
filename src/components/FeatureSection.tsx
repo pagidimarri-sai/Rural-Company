@@ -12,6 +12,7 @@ import HomeRepair from "./HomeRepair";
 import MassageForMen from "./MassageForMen";
 import SalonForMenSection from "./SalonForMenSection";
 import Footer from "./Footer";
+import FeaturedProfessionals from "./FeaturedProfessionals";
 
 const features = [
   { imageUrl: "/assets/ac.webp", link: "/services/ac-cleaning" },
@@ -142,6 +143,9 @@ export default function FeatureSection() {
           </div>
           <div className="mt-10">
             <SalonForMenSection />
+          </div>
+          <div className="mt-10">
+            <FeaturedProfessionals/>
           </div>
           <div className="mt-10">
             <Footer />
