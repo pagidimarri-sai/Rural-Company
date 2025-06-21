@@ -1,12 +1,5 @@
-import {
-  FaStar,
-  FaFemale,
-  FaMale,
-  FaCut,
-  FaHands,
-  FaPaintBrush,
-} from "react-icons/fa";
-import { FaSpa } from "react-icons/fa6";
+// pages/BeautyPage.tsx
+import { FaStar } from "react-icons/fa";
 
 // Section Components
 import AdBanner from "../components/AdBanner";
@@ -39,14 +32,32 @@ export default function BeautyPage() {
               />
             </div>
 
-            {/* Category Grid */}
+            {/* Category Grid with Icons */}
             <div className="grid grid-cols-3 gap-4 mb-4">
-              <Category icon={<FaFemale />} label="Salon For Women" />
-              <Category icon={<FaSpa />} label="Spa For Women" />
-              <Category icon={<FaCut />} label="Hair Studio" />
-              <Category icon={<FaPaintBrush />} label="Makeup & Styling" />
-              <Category icon={<FaMale />} label="Salon For Men" />
-              <Category icon={<FaHands />} label="Massage For Men" />
+              <Category
+                icon="/assets/salonforwomenicon.webp"
+                label="Salon For Women"
+              />
+              <Category
+                icon="/assets/spaforwomenicon.webp"
+                label="Spa For Women"
+              />
+              <Category
+                icon="/assets/hairstudioforwomenicon.webp"
+                label="Hair Studio"
+              />
+              <Category
+                icon="/assets/paintingwatericon.webp"
+                label="Makeup & Styling"
+              />
+              <Category
+                icon="/assets/salonformenicon.webp"
+                label="Salon For Men"
+              />
+              <Category
+                icon="/assets/massageformenicon.webp"
+                label="Massage For Men"
+              />
             </div>
 
             {/* Stats */}
@@ -67,33 +78,45 @@ export default function BeautyPage() {
 
           {/* RIGHT */}
           <div className="w-full md:w-1/2 flex justify-center items-center">
-            <div className="grid grid-cols-2 grid-rows-2 gap-2 h-[600px] w-full max-w-md">
-              <img src="/assets/images.jpeg" alt="Spa" className="w-full h-full object-cover rounded-xl shadow-md" />
-              <img src="/assets/images (1).jpeg" alt="Salon" className="w-full h-full object-cover rounded-xl shadow-md" />
-              <img src="/assets/pexels-richard-low-hong-33206323-7347538.jpg" alt="Hair" className="w-full h-full object-cover rounded-xl shadow-md" />
-              <img src="/assets/pexels-ian-panelo-3230236.jpg" alt="Massage" className="w-full h-full object-cover rounded-xl shadow-md" />
+            <div className="w-full max-w-md h-[600px]">
+              <img
+                src="/assets/beautypage1icon.webp"
+                alt="Beauty Services"
+                className="w-full h-full object-cover rounded-xl shadow-md"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 🔽 Feature Carousel (beauty only) */}
+      {/* 🔽 Feature Carousel */}
       <div className="mt-20">
         <div className="max-w-7xl mx-auto px-6">
           <BeautyFeatureSection />
         </div>
       </div>
 
-      {/* 🔽 Other Sections (optional based on your design) */}
+      {/* 🔽 Other Sections */}
       <div className="mt-20">
         <div className="max-w-7xl mx-auto px-6">
-          
-          <div className="mt-10"><SalonForWomenSection /></div>
-          <div className="mt-10"><SpaForWomenSection /></div>
-          <div className="mt-10"><AdBanner /></div>
-          <div className="mt-10"><MassageForMen /></div>
-          <div className="mt-10"><SalonForMenSection /></div>
-          <div className="mt-10"><Footer /></div>
+          <div className="mt-10">
+            <SalonForWomenSection />
+          </div>
+          <div className="mt-10">
+            <SpaForWomenSection />
+          </div>
+          <div className="mt-10">
+            <AdBanner />
+          </div>
+          <div className="mt-10">
+            <MassageForMen />
+          </div>
+          <div className="mt-10">
+            <SalonForMenSection />
+          </div>
+          <div className="mt-10">
+            <Footer />
+          </div>
         </div>
       </div>
     </div>
@@ -101,10 +124,10 @@ export default function BeautyPage() {
 }
 
 // 🔸 Category Card Component
-function Category({ icon, label }: { icon: React.ReactNode; label: string }) {
+function Category({ icon, label }: { icon: string; label: string }) {
   return (
     <div className="flex flex-col items-center bg-white rounded-xl shadow p-4 hover:shadow-md transition cursor-pointer">
-      <div className="text-purple-600 text-2xl mb-2">{icon}</div>
+      <img src={icon} alt={label} className="w-10 h-10 mb-2" />
       <p className="text-center text-sm font-medium text-gray-700">{label}</p>
     </div>
   );

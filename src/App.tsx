@@ -43,6 +43,7 @@ import CartPage from "./pages/CartPage";
 import BeautyPage from "./pages/BeautyPage";
 import SplashScreen from "./components/SplashScreen";
 import HowItWorks from "./components/HowItWorks";
+import HomePage from "./pages/HomePage";
 
 export default function App() {
   const [splashDone, setSplashDone] = useState(false);
@@ -55,19 +56,20 @@ export default function App() {
     <div className="min-h-screen bg-gray-100">
       <Header />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <HeroSection />
-              <HowItWorks />
-              <FeatureSection />
-            </>
-          }
-        />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/beauty" element={<BeautyPage />} />
-      </Routes>
+  <Route
+    path="/"
+    element={
+      <>
+        <HeroSection />
+        <HowItWorks />
+        <FeatureSection />
+      </>
+    }
+  />
+  <Route path="/cart" element={<CartPage />} />
+  <Route path="/beauty" element={<BeautyPage />} />
+  <Route path="/home" element={<HomePage />} /> {/* ✅ ADD THIS LINE */}
+</Routes>
     </div>
   );
 }
