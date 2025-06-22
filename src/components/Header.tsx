@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
 import OTPLoginModal from "./OTPLoginModal";
+import LocationModal from "./LocationModal";
 
 const logo = "/assets/urban-logo.png";
 
@@ -10,8 +11,10 @@ export default function Header() {
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [locationText, setLocationText] = useState("Hyderabad, Telangana");
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,9 +24,7 @@ export default function Header() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
 
   useEffect(() => {
@@ -90,11 +91,14 @@ export default function Header() {
 
           {/* Middle: Location & Search */}
           <div className="flex items-center gap-3 flex-grow max-w-[500px]">
-            <input
-              type="text"
-              placeholder="📍 Hyderabad, Telangana"
-              className="border rounded px-2 py-1 text-sm w-[160px] focus:ring-2 focus:ring-purple-300"
-            />
+            <div
+              onClick={() => setIsLocationModalOpen(true)}
+              className="border rounded px-3 py-1 text-sm w-[220px] cursor-pointer hover:ring-2 hover:ring-purple-300 truncate"
+              title="Click to change location"
+            >
+              📍 {locationText}
+            </div>
+
             <div className="relative flex-grow">
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
@@ -105,7 +109,7 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Right: Cart + Login (Shifted slightly left) */}
+          {/* Right: Cart + Login */}
           <div className="flex items-center gap-4 min-w-max -translate-x-4">
             <FaShoppingCart
               className="text-lg cursor-pointer hover:text-purple-600"
@@ -119,10 +123,7 @@ export default function Header() {
                 title="Login"
               />
               {showDropdown && (
-                <div
-                  className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-[999]"
-                  onClick={(e) => e.stopPropagation()}
-                >
+                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-[999]">
                   {!user ? (
                     <button
                       onClick={() => {
@@ -156,13 +157,22 @@ export default function Header() {
         </div>
       </header>
 
-      {/* OTP Modal */}
+      {/* OTP Login Modal */}
       <OTPLoginModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onLoginSuccess={(userData) => {
           setUser(userData);
           setIsModalOpen(false);
+        }}
+      />
+
+      {/* Location Modal */}
+      <LocationModal
+        isOpen={isLocationModalOpen}
+        onClose={() => setIsLocationModalOpen(false)}
+        onLocationSelect={(loc) => {
+          setLocationText(loc);
         }}
       />
     </>
