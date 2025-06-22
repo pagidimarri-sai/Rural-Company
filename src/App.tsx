@@ -35,7 +35,9 @@
 
 // src/App.tsx
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as  Routes, Route } from "react-router-dom";
+import ServiceDetailPage from "./pages/ServiceDetailPage"; // adjust the path as needed
+
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import FeatureSection from "./components/FeatureSection";
@@ -69,6 +71,8 @@ export default function App() {
   <Route path="/cart" element={<CartPage />} />
   <Route path="/beauty" element={<BeautyPage />} />
   <Route path="/home" element={<HomePage />} /> {/* ✅ ADD THIS LINE */}
+  <Route path="/service/:serviceSlug" element={<ServiceDetailPage />} />
+
 </Routes>
     </div>
   );
