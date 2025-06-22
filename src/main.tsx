@@ -1,28 +1,20 @@
-// import { StrictMode } from 'react'
-// import { createRoot } from 'react-dom/client'
-// import './index.css'
-// import App from './App.tsx'
-
-// createRoot(document.getElementById('root')!).render(
-//   <StrictMode>
-//     <App />
-//   </StrictMode>,
-// )
-
-import React from 'react';
-import 'leaflet/dist/leaflet.css';
-
-import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
+// File: src/main.tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import './index.css';
+import App from "./App";
+import { CartProvider } from "./contexts/CartContext"; // ✅ Import the context
+import "./index.css";
+import "leaflet/dist/leaflet.css";
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <BrowserRouter>
-        <App />
+        <CartProvider> {/* ✅ Wrap the App inside CartProvider */}
+          <App />
+        </CartProvider>
       </BrowserRouter>
     </React.StrictMode>
   );

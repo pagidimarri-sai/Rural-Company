@@ -1,8 +1,10 @@
+// File: src/components/Header.tsx
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
 import OTPLoginModal from "./OTPLoginModal";
 import LocationModal from "./LocationModal";
+import { useCart } from "../contexts/CartContext";
 
 const logo = "/assets/urban-logo.png";
 
@@ -15,10 +17,13 @@ export default function Header() {
   const [user, setUser] = useState<any>(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [locationText, setLocationText] = useState("Hyderabad, Telangana");
+  const [showCartPreview, setShowCartPreview] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
   const currentPath = location.pathname;
+
+  const { cartItems, cartTotal } = useCart();
 
   const keywords = ["facial", "kitchen cleaning", "AC repair"];
 
@@ -61,7 +66,6 @@ export default function Header() {
     <>
       <header className="bg-white shadow py-3 sticky top-0 z-50">
         <div className="max-w-[1280px] mx-auto px-6 flex justify-between items-center gap-4">
-          {/* Left: Logo + Nav */}
           <div className="flex items-center gap-4 min-w-max mr-4">
             <img
               src={logo}
@@ -89,7 +93,6 @@ export default function Header() {
             </nav>
           </div>
 
-          {/* Middle: Location & Search */}
           <div className="flex items-center gap-3 flex-grow max-w-[500px]">
             <div
               onClick={() => setIsLocationModalOpen(true)}
@@ -109,13 +112,41 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Right: Cart + Login */}
           <div className="flex items-center gap-4 min-w-max -translate-x-4">
-            <FaShoppingCart
-              className="text-lg cursor-pointer hover:text-purple-600"
-              title="Cart"
-              onClick={() => navigate("/cart")}
-            />
+            <div
+              className="relative cursor-pointer"
+              onClick={() => setShowCartPreview(!showCartPreview)}
+            >
+              <FaShoppingCart className="text-lg hover:text-purple-600" title="Cart" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full px-1.5 py-0.5">
+                  {cartItems.reduce((acc, item) => acc + item.quantity, 0)}
+                </span>
+              )}
+              {showCartPreview && cartItems.length > 0 && (
+                <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg p-4 z-[999]">
+                  <h3 className="text-sm font-semibold text-gray-800 mb-2">Cart Items</h3>
+                  <ul className="max-h-60 overflow-y-auto">
+                    {cartItems.map((item, index) => (
+                      <li key={index} className="flex justify-between items-center mb-2 text-sm">
+                        <span>{item.title}</span>
+                        <span className="text-gray-600">×{item.quantity}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-2 text-right text-sm font-semibold text-purple-700">
+                    Total: ₹{cartTotal.toFixed(2)}
+                  </div>
+                  <button
+                    onClick={() => navigate("/cart")}
+                    className="mt-3 w-full bg-purple-600 text-white py-1 rounded hover:bg-purple-700 text-sm"
+                  >
+                    Go to Cart
+                  </button>
+                </div>
+              )}
+            </div>
+
             <div className="relative">
               <FaUser
                 onClick={() => setShowDropdown(!showDropdown)}
@@ -157,7 +188,6 @@ export default function Header() {
         </div>
       </header>
 
-      {/* OTP Login Modal */}
       <OTPLoginModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -167,7 +197,6 @@ export default function Header() {
         }}
       />
 
-      {/* Location Modal */}
       <LocationModal
         isOpen={isLocationModalOpen}
         onClose={() => setIsLocationModalOpen(false)}
