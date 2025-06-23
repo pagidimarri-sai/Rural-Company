@@ -1207,7 +1207,50 @@ export const servicesData: Record<string, ServiceDataType> = {
     { title: "Parapet Wall Waterproofing", description: "Waterproof side walls on terrace", price: "₹1299", duration: "2 hrs" },
     { title: "Anti-Algae Exterior Coating", description: "Prevent fungus & algae buildup", price: "₹1599", duration: "2 hrs" }
   ]
+},
+"wall-panels": {
+  name: "Wall Panels",
+  banner: "https://cdn-icons-png.flaticon.com/512/3303/3303896.png",
+  serviceItems: [
+    { name: "PVC Panels", icon: "https://cdn-icons-png.flaticon.com/512/7040/7040386.png" },
+    { name: "3D Wall Panels", icon: "https://cdn-icons-png.flaticon.com/512/1995/1995735.png" },
+    { name: "WPC Panels", icon: "https://cdn-icons-png.flaticon.com/512/4544/4544145.png" },
+    { name: "Fabric Panels", icon: "https://cdn-icons-png.flaticon.com/512/2451/2451860.png" },
+    { name: "Wooden Panels", icon: "https://cdn-icons-png.flaticon.com/512/6327/6327930.png" },
+    { name: "Metal Panels", icon: "https://cdn-icons-png.flaticon.com/512/6326/6326506.png" },
+    { name: "Acoustic Panels", icon: "https://cdn-icons-png.flaticon.com/512/1475/1475730.png" },
+    { name: "LED Panels", icon: "https://cdn-icons-png.flaticon.com/512/6045/6045794.png" },
+    { name: "Decorative Panels", icon: "https://cdn-icons-png.flaticon.com/512/2276/2276931.png" }
+  ],
+  promises: [
+    "Premium Materials",
+    "Custom Design Options",
+    "Expert Installation Team"
+  ],
+  packages: [
+    { title: "PVC Wall Panel Installation (per sq.ft.)", description: "Durable panels for easy maintenance", price: "₹90/sq.ft", duration: "Varies" },
+    { title: "3D Panel Installation", description: "Eye-catching 3D texture panels", price: "₹250/sq.ft", duration: "Varies" },
+    { title: "WPC Panel Cladding", description: "Wood-polymer panels with matte finish", price: "₹180/sq.ft", duration: "Varies" },
+    { title: "Fabric Panel Setup", description: "Soft touch panels for headboards/walls", price: "₹299/sq.ft", duration: "Varies" },
+    { title: "Wooden Paneling (Veneer)", description: "Premium wood veneer panel work", price: "₹350/sq.ft", duration: "Varies" },
+    { title: "Metal Panel Wall Installation", description: "Rust-proof & sleek designs", price: "₹220/sq.ft", duration: "Varies" },
+    { title: "Soundproof Acoustic Panels", description: "Noise control wall solution", price: "₹450/sq.ft", duration: "Varies" },
+    { title: "LED Wall Panel Setup", description: "Panel design with embedded LED strips", price: "₹600/sq.ft", duration: "Varies" },
+    { title: "Decorative Wall Paneling", description: "Stylish panels for TV walls & lobbies", price: "₹299/sq.ft", duration: "Varies" },
+    { title: "False Wall Panel Partition", description: "Create divisions using panels", price: "₹1299", duration: "2 hrs" },
+    { title: "TV Wall Panel Combo", description: "Custom design + install TV panel wall", price: "₹6999", duration: "1 day" },
+    { title: "Headboard Wall Panel", description: "Fabric or PVC padded head wall", price: "₹5499", duration: "3 hrs" },
+    { title: "Ceiling to Floor Paneling", description: "Full vertical panel coverage", price: "₹160/sq.ft", duration: "Varies" },
+    { title: "Alcove Panel Design", description: "Custom alcove cladding", price: "₹2999", duration: "2 hrs" },
+    { title: "Corner Accent Panels", description: "Paneling for wall edges/corners", price: "₹1999", duration: "1.5 hrs" },
+    { title: "Marble-Finish Panel Installation", description: "PVC marble-textured finish", price: "₹299/sq.ft", duration: "Varies" },
+    { title: "Moisture-Resistant Bathroom Panels", description: "PVC/WPC panels for wet areas", price: "₹199/sq.ft", duration: "Varies" },
+    { title: "Office Wall Panel Design", description: "Minimalist & formal panels for offices", price: "₹249/sq.ft", duration: "Varies" },
+    { title: "Custom Panel Design Consultation", description: "On-site measurement + mockup", price: "₹499", duration: "30 mins" },
+    { title: "Old Panel Removal", description: "Safe dismantling of existing panels", price: "₹799", duration: "1 hr" }
+  ]
 }
+
 
 
 

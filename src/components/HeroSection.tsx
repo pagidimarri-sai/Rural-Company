@@ -1,5 +1,29 @@
 import { useState } from "react";
 import ServicePopup from "./ServicePopup";
+const trendingSearches = [
+  "Salon for Women",
+  "AC Repair",
+  "Full Home Cleaning",
+  "Geyser Work",
+  "Wall Panels",
+  "Painting & Waterproofing",
+  "Laptop",
+  "TV",
+];
+
+const globalSearchItems = [
+  { name: "Salon for Women", icon: "https://cdn-icons-png.flaticon.com/512/3105/3105928.png" },
+  { name: "Spa for Women", icon: "https://cdn-icons-png.flaticon.com/512/2965/2965567.png" },
+  { name: "Hair Studio", icon: "https://cdn-icons-png.flaticon.com/512/912/912214.png" },
+  { name: "AC Repair", icon: "https://cdn-icons-png.flaticon.com/512/2933/2933916.png" },
+  { name: "Full Home Cleaning", icon: "https://cdn-icons-png.flaticon.com/512/1585/1585235.png" },
+  { name: "Geyser Work", icon: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png" },
+  { name: "Wall Panels", icon: "https://cdn-icons-png.flaticon.com/512/2281/2281138.png" },
+  { name: "Painting & Waterproofing", icon: "https://cdn-icons-png.flaticon.com/512/809/809957.png" },
+  { name: "Laptop", icon: "https://cdn-icons-png.flaticon.com/512/841/841364.png" },
+  { name: "TV", icon: "https://cdn-icons-png.flaticon.com/512/2920/2920296.png" },
+];
+
 
 interface SubService {
   name: string;
@@ -10,6 +34,10 @@ export default function HeroSection() {
   const [popupOpen, setPopupOpen] = useState(false);
   const [popupTitle, setPopupTitle] = useState("");
   const [subServices, setSubServices] = useState<SubService[]>([]);
+  const [searchText, setSearchText] = useState("");
+const [suggestions, setSuggestions] = useState<SubService[]>([]);
+const [showSuggestions, setShowSuggestions] = useState(false);
+
 
   const openPopup = (title: string, services: SubService[]) => {
     setPopupTitle(title);
@@ -29,13 +57,53 @@ export default function HeroSection() {
           </h2>
 
           {/* Search */}
-          <div className="mb-6">
-            <input
-              type="text"
-              placeholder="What are you looking for?"
-              className="w-full px-5 py-3 rounded-lg shadow bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
-            />
-          </div>
+          {/* Global Search Input */}
+<div className="mb-6 relative">
+  <input
+    type="text"
+    value={searchText}
+    onFocus={() => {
+      setSuggestions(
+        trendingSearches
+          .map((name) => globalSearchItems.find((item) => item.name === name))
+          .filter(Boolean) as SubService[]
+      );
+      setShowSuggestions(true);
+    }}
+    onChange={(e) => {
+      const value = e.target.value;
+      setSearchText(value);
+      setSuggestions(
+        globalSearchItems.filter((item) =>
+          item.name.toLowerCase().includes(value.toLowerCase())
+        )
+      );
+      setShowSuggestions(true);
+    }}
+    placeholder="What are you looking for?"
+    className="w-full px-5 py-3 rounded-lg shadow bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+  />
+
+  {showSuggestions && suggestions.length > 0 && (
+    <ul className="absolute z-10 bg-white border border-gray-200 rounded-lg shadow-lg mt-2 w-full max-h-60 overflow-auto">
+      {suggestions.map((item, idx) => (
+        <li
+          key={idx}
+          className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 cursor-pointer"
+          onClick={() => {
+            openPopup(item.name, [item]);
+            setSearchText("");
+            setShowSuggestions(false);
+          }}
+        >
+          <img src={item.icon} alt={item.name} className="w-6 h-6" />
+          <span className="text-gray-700">{item.name}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
 
           {/* Grid Buttons */}
           <div className="grid grid-cols-3 gap-4 mb-4">
@@ -144,13 +212,13 @@ export default function HeroSection() {
               <div
                 className="flex flex-1 flex-col items-center bg-white rounded-xl shadow p-4 hover:shadow-md transition cursor-pointer"
                 onClick={() =>
-                  openPopup("Smart Locks", [
-                    { name: "Native Lock", icon: "/assets/smartlockicon.webp" },
+                  openPopup("Wall Panels", [
+                    { name: "Wall Panels", icon: "/assets/wallpanels.webp" },
                   ])
                 }
               >
-                <img src="/assets/smartlockicon.webp" alt="" className="w-10 h-10 mb-2" />
-                <p className="text-center text-sm font-medium text-gray-700">Smart Locks</p>
+                <img src="/assets/wallpanels.webp" alt="" className="w-10 h-10 mb-2" />
+                <p className="text-center text-sm font-medium text-gray-700">Wall Panels</p>
               </div>
 
               <div
