@@ -56,6 +56,9 @@ import HowItWorks from "./components/HowItWorks";
 import HomePage from "./pages/HomePage";
 import ServiceDetailPage from "./pages/ServiceDetailPage";
 import { useState } from "react";
+import CheckoutPage from "./pages/CheckoutPage";
+import PaymentPage from "./pages/PaymentPage";
+import SuccessPage from "./pages/SuccessPage";
 
 export default function App() {
   const [splashDone, setSplashDone] = useState(false);
@@ -82,6 +85,9 @@ export default function App() {
         <Route path="/beauty" element={<BeautyPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/service/:serviceSlug" element={<ServiceDetailPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
+<Route path="/success" element={<SuccessPage />} />
       </Routes>
     </div>
   );

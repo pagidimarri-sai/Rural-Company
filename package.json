@@ -19,6 +19,7 @@
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "firebase": "^9.22.2",
+    "framer-motion": "^12.18.2",
     "leaflet": "^1.9.4",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.522.0",
