@@ -182,7 +182,7 @@
 // //       const result = await confirmationResult.confirm(otp);
 // //       const phoneNumber = result.user.phoneNumber;
 
-// //       const res = await axios.post("http://localhost:5000/api/auth/verify-otp", {
+// //       const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/auth/verify-otp", {
 // //         phone: phoneNumber,
 // //       });
 
@@ -353,7 +353,7 @@
 // //       const result = await confirmationResult.confirm(otp);
 // //       const phoneNumber = result.user.phoneNumber;
 
-// //       const res = await axios.post("http://localhost:5000/api/auth/verify-otp", {
+// //       const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/auth/verify-otp", {
 // //         phone: phoneNumber,
 // //       });
 
@@ -527,7 +527,7 @@
 //       const result = await confirmationResult.confirm(otp);
 //       const phoneNumber = result.user.phoneNumber;
 
-//       const res = await axios.post("http://localhost:5000/api/auth/verify-otp", {
+//       const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/auth/verify-otp", {
 //         phone: phoneNumber,
 //       });
 
