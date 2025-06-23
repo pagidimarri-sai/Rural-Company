@@ -435,14 +435,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
-import OTPLoginModal from "./OTPLoginModal";
+import SimpleLoginModal from "./SimpleLoginModal";
 import LocationModal from "./LocationModal";
 import { useCart } from "../contexts/CartContext";
 import clsx from "clsx";
 
 const logo = "/assets/urban-logo.png";
 
-// Define your search suggestions globally
 const trendingSearches = [
   "Salon for Women",
   "AC Repair",
@@ -490,7 +489,6 @@ export default function Header() {
   const currentPath = location.pathname;
   const totalQty = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  // Typing effect
   useEffect(() => {
     const words = ["facial", "kitchen cleaning", "AC repair"];
     const currentWord = words[wordIndex];
@@ -509,7 +507,6 @@ export default function Header() {
     return () => clearTimeout(timeout);
   }, [charIndex, wordIndex]);
 
-  // Close suggestions on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
@@ -550,7 +547,6 @@ export default function Header() {
     <>
       <header className="bg-white shadow py-3 sticky top-0 z-50">
         <div className="max-w-[1280px] mx-auto px-6 flex justify-between items-center gap-4">
-          {/* Logo + Nav */}
           <div className="flex items-center gap-4 min-w-max mr-4">
             <img
               src={logo}
@@ -578,7 +574,6 @@ export default function Header() {
             </nav>
           </div>
 
-          {/* Location + Search */}
           <div className="flex items-center gap-3 flex-grow max-w-[500px]">
             <div
               onClick={() => setIsLocationModalOpen(true)}
@@ -588,7 +583,6 @@ export default function Header() {
               📍 {locationText}
             </div>
 
-            {/* Global Search */}
             <div className="relative flex-grow" ref={searchRef}>
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
@@ -634,7 +628,6 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Cart + User */}
           <div className="flex items-center gap-4 min-w-max -translate-x-4">
             <div
               className="relative cursor-pointer"
@@ -714,7 +707,7 @@ export default function Header() {
         </div>
       </header>
 
-      <OTPLoginModal
+      <SimpleLoginModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onLoginSuccess={(userData) => {

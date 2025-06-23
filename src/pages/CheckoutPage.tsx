@@ -1,5 +1,3 @@
-// CheckoutPage.tsx - Final version, type-safe, no build errors
-
 import { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
@@ -61,7 +59,25 @@ export default function CheckoutPage() {
       alert("Please select both address and slot before proceeding.");
       return;
     }
-    navigate("/payment");
+
+    const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+    const token = localStorage.getItem("token") || "";
+
+    navigate("/payment", {
+      state: {
+        cartItems,
+        totalAmount,
+        tip,
+        discount,
+        token,
+        address: {
+          coordinates: position,
+          fullAddress: mapLocation,
+          label: "Home",
+        },
+        slot,
+      },
+    });
   };
 
   const handleSaveLocation = () => {
