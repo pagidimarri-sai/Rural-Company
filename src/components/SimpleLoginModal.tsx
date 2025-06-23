@@ -22,11 +22,12 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginMod
     }
 
     try {
-      const res = await axios.post("${import.meta.env.VITE_API_BASE_URL}/api/auth/register", {
-        name,
-        email,
-        phone,
-      });
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/auth/register`, {
+  name,
+  email,
+  phone,
+});
+
       const { token, user } = res.data;
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
