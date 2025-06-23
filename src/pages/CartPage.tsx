@@ -1,18 +1,11 @@
-import { FaShoppingCart } from "react-icons/fa";
+// File: src/pages/CartPage.tsx
+import { FaShoppingCart, FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
-import { useState } from "react";
 
 export default function CartPage() {
   const navigate = useNavigate();
-  const { cartItems, cartTotal, applyPromoCode, discount } = useCart();
-  const [promoInput, setPromoInput] = useState("");
-  const [promoMessage, setPromoMessage] = useState("");
-
-  const handleApplyPromo = () => {
-    const success = applyPromoCode(promoInput);
-    setPromoMessage(success ? "Promo applied!" : "Invalid code");
-  };
+  const { cartItems, removeFromCart, cartTotal } = useCart();
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-12 max-w-xl mx-auto">
@@ -37,36 +30,22 @@ export default function CartPage() {
                 <h4 className="text-gray-800 font-medium">{item.title}</h4>
                 <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
               </div>
-              <p className="text-purple-600 font-semibold">₹{(item.price * item.quantity).toFixed(2)}</p>
+              <div className="text-right">
+                <p className="text-purple-600 font-semibold">
+                  ₹{(item.price * item.quantity).toFixed(2)}
+                </p>
+                <button
+                  onClick={() => removeFromCart(item.title)}
+                  className="mt-2 text-sm text-red-500 hover:text-red-700 flex items-center gap-1"
+                >
+                  <FaTrashAlt /> Remove
+                </button>
+              </div>
             </div>
           ))}
 
-          <div className="bg-white shadow rounded p-4">
-            <h4 className="text-lg font-semibold mb-2 text-gray-800">Apply Promo Code</h4>
-            <div className="flex gap-2">
-              <input
-                value={promoInput}
-                onChange={(e) => setPromoInput(e.target.value)}
-                placeholder="Enter code"
-                className="border rounded px-3 py-2 w-full text-sm"
-              />
-              <button
-                onClick={handleApplyPromo}
-                className="bg-purple-600 text-white px-4 rounded hover:bg-purple-700 text-sm"
-              >
-                Apply
-              </button>
-            </div>
-            {promoMessage && (
-              <p className={`text-sm mt-2 ${discount > 0 ? "text-green-600" : "text-red-500"}`}>
-                {promoMessage}
-              </p>
-            )}
-          </div>
-
-          <div className="text-right mt-6">
-            {discount > 0 && <p className="text-sm text-green-600">Discount: -₹{discount.toFixed(2)}</p>}
-            <p className="text-lg font-bold text-purple-700">Total: ₹{cartTotal.toFixed(2)}</p>
+          <div className="text-right font-bold text-purple-700 mt-6">
+            Total: ₹{cartTotal.toFixed(2)}
           </div>
         </div>
       )}

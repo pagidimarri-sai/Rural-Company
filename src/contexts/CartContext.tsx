@@ -1,10 +1,15 @@
-// File: src/contexts/CartContext.tsx
-import { createContext, useContext, useState, useEffect } from "react";
-import type { ReactNode } from "react";
+// src/contexts/CartContext.tsx
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  type ReactNode,
+} from "react";
 
 export interface CartItem {
   title: string;
-  price: number; // ✅ Use number
+  price: number; // ✅ Stored as number only
   quantity: number;
 }
 
@@ -12,9 +17,8 @@ interface CartContextType {
   cartItems: CartItem[];
   addToCart: (item: CartItem) => void;
   updateQuantity: (title: string, delta: number) => void;
-  applyPromoCode: (code: string) => boolean;
+  removeFromCart: (title: string) => void;
   cartTotal: number;
-  discount: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -22,10 +26,16 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const stored = localStorage.getItem("cart");
-    return stored ? JSON.parse(stored) : [];
+    try {
+      const parsed = JSON.parse(stored || "[]");
+      return parsed.map((item: any) => ({
+        ...item,
+        price: typeof item.price === "number" ? item.price : parseFloat(item.price.toString().replace(/[^\d.]/g, "")) || 0,
+      }));
+    } catch {
+      return [];
+    }
   });
-
-  const [discount, setDiscount] = useState(0);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -57,27 +67,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
-  const applyPromoCode = (code: string): boolean => {
-    const normalized = code.trim().toUpperCase();
-    if (normalized === "WELCOME10") {
-      setDiscount(10);
-      return true;
-    } else if (normalized === "SAVE50") {
-      setDiscount(50);
-      return true;
-    }
-    setDiscount(0);
-    return false;
+  const removeFromCart = (title: string) => {
+    setCartItems((prev) => prev.filter((item) => item.title !== title));
   };
 
   const cartTotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
-  ) - discount;
+  );
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, updateQuantity, applyPromoCode, cartTotal, discount }}
+      value={{ cartItems, addToCart, updateQuantity, removeFromCart, cartTotal }}
     >
       {children}
     </CartContext.Provider>

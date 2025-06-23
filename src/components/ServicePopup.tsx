@@ -42,12 +42,7 @@ export default function ServicePopup({
           </button>
         </div>
 
-        {/* Search Box */}
-        {/* <input
-          type="text"
-          placeholder="Search for a service"
-          className="w-full mb-3 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
-        /> */}
+        
 
         {/* Icons */}
         <div className="grid grid-cols-3 gap-2">
