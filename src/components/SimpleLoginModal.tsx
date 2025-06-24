@@ -92,7 +92,7 @@
 //     document.body
 //   );
 // }
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { IoMdClose } from "react-icons/io";
 import axios from "axios";
@@ -113,6 +113,25 @@ export default function SimpleLoginModal({
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
 
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // ✅ Close modal on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
   const handleLogin = async () => {
     if (!name || !email || phone.length !== 10) {
       setError("Please enter valid name, email and 10-digit phone number.");
@@ -122,11 +141,7 @@ export default function SimpleLoginModal({
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/auth/register`,
-        {
-          name,
-          email,
-          phone,
-        }
+        { name, email, phone }
       );
 
       const { token, user } = res.data;
@@ -143,7 +158,10 @@ export default function SimpleLoginModal({
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20">
-      <div className="bg-white w-full max-w-sm mx-4 p-6 rounded-xl shadow-lg relative">
+      <div
+        ref={modalRef}
+        className="bg-white w-full max-w-sm mx-4 p-6 rounded-xl shadow-lg relative"
+      >
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
