@@ -379,7 +379,8 @@ export default function HeroSection() {
 
           {/* Grid Buttons */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
-
+            
+                      
             {/* Women's Salon */}
             <div
               className="flex flex-col items-center bg-white rounded-xl shadow p-4 hover:shadow-md transition cursor-pointer"
@@ -523,7 +524,7 @@ export default function HeroSection() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="w-full lg:w-1/2 flex justify-center items-center">
+<div className="hidden md:flex w-full lg:w-1/2 justify-center items-center">
           <div className="grid grid-cols-2 grid-rows-2 gap-2 h-[300px] sm:h-[500px] md:h-[600px] w-full max-w-md">
             <img src="/assets/images.png" alt="Spa" className="w-full h-full object-cover rounded-xl shadow-md" />
             <img src="/assets/images (1).jpeg" alt="Salon" className="w-full h-full object-cover rounded-xl shadow-md" />
