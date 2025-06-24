@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
+
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import FeatureSection from "./components/FeatureSection";
@@ -18,7 +19,6 @@ import MobileBottomNav from "./components/MobileBottomNav";
 export default function App() {
   const [splashDone, setSplashDone] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [user, setUser] = useState(null);
 
   if (!splashDone) {
     return <SplashScreen onFinish={() => setSplashDone(true)} />;
@@ -50,12 +50,11 @@ export default function App() {
       </Routes>
 
       <SimpleLoginModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onLoginSuccess={(userData) => {
-          setUser(userData);
-          setIsModalOpen(false);
-        }}
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  onLoginSuccess={() => {
+    setIsModalOpen(false);
+  }}
       />
     </div>
   );

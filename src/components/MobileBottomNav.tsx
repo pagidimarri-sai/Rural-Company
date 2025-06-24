@@ -4,11 +4,7 @@ import { PiWallFill } from "react-icons/pi";
 import { GiWaterDrop } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 
-export default function MobileBottomNav({
-  onAccountClick,
-}: {
-  onAccountClick: () => void;
-}) {
+export default function MobileBottomNav({ onAccountClick }: { onAccountClick: () => void }) {
   const navigate = useNavigate();
 
   return (
